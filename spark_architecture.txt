@@ -1,0 +1,53 @@
+Apache Spark Architecture Diagram Description:
+
+This diagram illustrates the layered architecture of Apache Spark in the Movie Review System:
+
+┌─────────────────────────────────────────────────────────────┐
+│                    ┌─────────────────────┐                  │
+│                    │   Application UI    │                  │
+│                    └─────────────────────┘                  │
+│                               │                             │
+├───────────────────────────────┼─────────────────────────────┤
+│                    ┌─────────────────────┐                  │
+│                    │  Spark SQL / DataFrames │              │
+│                    └─────────────────────┘                  │
+│                               │                             │
+│         ┌──────────┬──────────┼──────────┬──────────┐       │
+│         │          │          │          │          │       │
+│    ┌─────────┐ ┌────────┐ ┌────────┐ ┌─────────┐ ┌────────┐│
+│    │ Spark   │ │ Spark  │ │  MLlib │ │ GraphX  │ │ Spark  ││
+│    │Streaming│ │  SQL   │ │        │ │         │ │  Core  ││
+│    └─────────┘ └────────┘ └────────┘ └─────────┘ └────────┘│
+│         │          │          │          │          │       │
+├─────────┼──────────┼──────────┼──────────┼──────────┼───────┤
+│         │          │          │          │          │       │
+│    ┌─────────────────────────────────────────────────────┐  │
+│    │           Spark Core (Distributed Engine)           │  │
+│    │                                                     │  │
+│    │  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  │  │
+│    │  │   Driver    │  │  Executor   │  │  Executor   │  │  │
+│    │  │   Program   │  │     1       │  │     2       │  │  │
+│    │  └─────────────┘  └─────────────┘  └─────────────┘  │  │
+│    └─────────────────────────────────────────────────────┘  │
+│                               │                             │
+├───────────────────────────────┼─────────────────────────────┤
+│                    ┌─────────────────────┐                  │
+│                    │   Cluster Manager    │                  │
+│                    │ (Standalone/YARN/Mesos)│               │
+│                    └─────────────────────┘                  │
+│                               │                             │
+│         ┌─────────────────────┼─────────────────────┐       │
+│         │                     │                     │       │
+│  ┌─────────────┐      ┌─────────────┐      ┌─────────────┐ │
+│  │    Node     │      │    Node     │      │    Node     │ │
+│  │   Worker    │      │   Worker    │      │   Worker    │ │
+│  └─────────────┘      └─────────────┘      └─────────────┘ │
+└─────────────────────────────────────────────────────────────┘
+
+In the Movie Review System context:
+- Application UI: Web interface for users to submit/view reviews
+- Spark SQL/DataFrames: Used for querying movie metadata and reviews
+- Spark Streaming: Processes real-time review submissions
+- MLlib: Performs sentiment analysis on reviews
+- GraphX: Analyzes user relationships and social connections
+- Spark Core: Distributes processing tasks across the cluster
