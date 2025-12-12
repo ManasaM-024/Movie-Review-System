@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎬 Movie Recommendation System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>🎬 Movie Recommendation System</h1>
+            <p class="subtitle">Powered by Apache Spark & Machine Learning</p>
+        </header>
+
+        <!-- Statistics Dashboard -->
+        <div class="stats-container" id="statsContainer">
+            <div class="stat-card">
+                <div class="stat-number" id="totalUsers">-</div>
+                <div class="stat-label">Total Users</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="totalMovies">-</div>
+                <div class="stat-label">Total Movies</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="totalRatings">-</div>
+                <div class="stat-label">Total Ratings</div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- User Selection Panel -->
+            <div class="panel">
+                <h2>Get Movie Recommendations</h2>
+                <div class="form-group">
+                    <label for="userSelect">Select User ID:</label>
+                    <select id="userSelect" class="select-input">
+                        <option value="">Loading users...</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="numRecs">Number of Recommendations:</label>
+                    <input type="number" id="numRecs" value="10" min="1" max="50" class="number-input">
+                </div>
+                <button id="getRecsBtn" class="btn btn-primary">Get Recommendations</button>
+            </div>
+
+            <!-- Recommendations Display -->
+            <div class="panel recommendations-panel" id="recommendationsPanel" style="display: none;">
+                <h2>Recommendations for User <span id="currentUserId"></span></h2>
+                <div id="recommendationsList" class="recommendations-list"></div>
+            </div>
+
+            <!-- Loading Spinner -->
+            <div id="loadingSpinner" class="loading-spinner" style="display: none;">
+                <div class="spinner"></div>
+                <p>Loading recommendations...</p>
+            </div>
+
+            <!-- Error Message -->
+            <div id="errorMessage" class="error-message" style="display: none;"></div>
+        </div>
+
+        <!-- Movie Browser -->
+        <div class="panel movie-browser">
+            <h2>Browse Movies</h2>
+            <div class="form-group">
+                <input type="text" id="searchMovies" placeholder="Search movies by title..." class="search-input">
+            </div>
+            <div id="moviesList" class="movies-list"></div>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p>Built with PySpark ALS (Alternating Least Squares) Recommendation Algorithm</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
